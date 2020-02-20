@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_ratings
   resources :ratings
   resources :products
   resources :addresses
