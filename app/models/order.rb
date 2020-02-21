@@ -1,4 +1,11 @@
 class Order < ApplicationRecord
-  belongs_to :user_id
-  belongs_to :address_id
+  belongs_to :user
+  belongs_to :address
+  has_many :order_products
+  has_many :products, through: :order_products
+
+  validates :user_id, presence: true
+  validates :drive_id, presence: true
+  validates :address_id, presence: true
+
 end
