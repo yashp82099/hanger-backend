@@ -57,6 +57,10 @@ ActiveRecord::Schema.define(version: 2020_02_20_200025) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+
+ #in User add 
+
+
   create_table "users", force: :cascade do |t|
     t.string "image"
     t.integer "point"
