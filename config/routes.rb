@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get '/get/products', to: 'products#get_products', as: 'get_products'
+  get '/get/user', to: 'users#get_user', as: 'get_user'
+  get '/get/orders', to: 'orders#get_orders', as: 'get_orders'
   resources :sessions
   resources :users
   resources :orders

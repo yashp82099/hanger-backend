@@ -1,8 +1,12 @@
+
 class ApplicationController < ActionController::API
+    
     def current_user
-        token = request.headers['Access-Token']
+        
+        token = request.headers['Token']
         if token
             user_id = JWT.decode(token, ENV['SECRET'])[0]["user_id"]
+            # byebug
             User.find_by(id: user_id)
         else 
             nil

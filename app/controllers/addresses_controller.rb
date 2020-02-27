@@ -3,10 +3,10 @@ class AddressesController < ApplicationController
     before_action :current_user, only: [:index, :show]
 
     def create
+        # byebug
         @address = Address.new(address_params)
         @user = current_user
         @address.user_id = @user.id
-        # byebug
         if @address.valid?
             @address.save
             render json: {msg: 'PASS', address: @address}

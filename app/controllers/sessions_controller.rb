@@ -2,10 +2,11 @@ class SessionsController < ApplicationController
 
 
     def create
+        # byebug
         @user = User.find_by(username: login[:username])
         if @user && @user.authenticate(login[:password])
             token = JWT.encode({user_id: @user.id}, ENV['SECRET'])
-            render :json => {msg: 'PASS   ',:token => token }
+            render :json => {msg: 'PASS',:token => token }
         else
             render :json => {msg: 'FAIL'}
         end

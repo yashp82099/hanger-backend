@@ -7,13 +7,21 @@ class UsersController < ApplicationController
         render json: @users
     end
 
+    def get_user
+        @user = current_user
+        render json: @user, :include => [:addresses]
+        # byebug
+    end
+
     def show 
         @user = current_user
+        # byebug
         render json: @user
     end
 
     def create
-        # byebug
+        byebug
+
         @user = User.new(user_params)
         if @user.valid?
             @user.save
