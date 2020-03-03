@@ -1,4 +1,5 @@
-
+require 'rest-client'
+require 'json'
 
 class ProductsController < ApplicationController
 
@@ -6248,6 +6249,34 @@ class ProductsController < ApplicationController
 
     def get_products_2
 
+        link = 'https://apidojo-forever21-v1.p.rapidapi.com/products/search?start=0&rows=400'
+
+        if params[:product][:search] != ''
+            link = link + '&query=' +  params[:product][:search]
+        else 
+            link = link + '&query=' +  'top'
+        end
+        
+        if params[:product][:sort] != ''
+            link = link + '&sort=' +  params[:product][:sort]
+        end
+        if params[:product][:color] != ''
+            link = link + '&color_groups=' +  params[:product][:color]
+        end
+        if params[:product][:gender] != ''
+            link = link + '&gender=' +  params[:product][:gender]
+        end
+        if params[:product][:size] != ''
+            link = link + '&sizes=' +  params[:product][:size]
+        end
+
+
+        res = RestClient::Request.execute(method: :get, url: link,
+            headers: {"X-RapidAPI-Host": "apidojo-forever21-v1.p.rapidapi.com", "X-RapidAPI-Key": "1739a3887cmsh4bd15a0da50b87dp1984d5jsna879749990e2" })
+        @data = JSON.parse(res)
+        # byebug
+
+        render json: @data
     end
 
     def create 

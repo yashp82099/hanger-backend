@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_125442) do
+ActiveRecord::Schema.define(version: 2020_03_02_130507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,17 +25,19 @@ ActiveRecord::Schema.define(version: 2020_02_26_125442) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "lat"
+    t.float "long"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "order_products", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "order_id"
-    t.integer "price"
     t.integer "quantity"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "price"
     t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
@@ -63,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_02_26_125442) do
   create_table "users", force: :cascade do |t|
     t.string "image"
     t.integer "point"
-    t.integer "phone_number"
+    t.bigint "phone_number"
     t.string "first_name"
     t.string "last_name"
     t.string "username"

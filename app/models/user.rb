@@ -3,19 +3,19 @@ class User < ApplicationRecord
     has_many :addresses
     has_many :orders
 
-    validates :first_name, presence: true
+    validates :first_name, presence: true,:on => :create
 
-    validates :last_name, presence: true 
+    validates :last_name, presence: true , :on => :create
 
-    validates :username, presence: true
-    validates :username, uniqueness: true, on: :create
+    validates :username, presence: true, :on => :create
+    validates :username, uniqueness: true, :on => :create
 
-    validates :phone_number, presence: true
+    validates :phone_number, presence: true, :on => :create
     
-    validates :email, presence: true
-    validates :email, uniqueness: true
+    validates :email, presence: true, :on => :create
+    validates :email, uniqueness: true, :on => :create
 
-    validates :password, presence: true
+    validates :password, presence: true,:on => :create
     
     
 

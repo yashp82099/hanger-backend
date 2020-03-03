@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     def get_user
         @user = current_user
-        render json: @user, :include => [:addresses]
+        render json: @user, :include => [:addresses, :orders => {:include => [:products, :address, :order_products]}]
         # byebug
     end
 
@@ -23,6 +23,20 @@ class UsersController < ApplicationController
         byebug
 
         @user = User.new(user_params)
+        @user.driver = 0
+        if @user.valid?
+            @user.save
+            render :json => {:msg => 'PASS'}
+        else
+            render :json => {:msg => 'FAIL'}
+        end
+    end
+
+
+    def create_drive
+        byebug
+        @user = User.new(drive_params)
+        @user.driver = 1
         if @user.valid?
             @user.save
             render :json => {:msg => 'PASS'}
@@ -32,8 +46,10 @@ class UsersController < ApplicationController
     end
 
     def update 
-        @user = User.update(update_params)
-        if @user.valid?
+        @user = User.find_by(id: params[:id])
+        @user.update(update_params)
+        byebug
+        if @user.save
             @user.save
             render :json => {msg: 'PASS', user: @user}
         else
@@ -46,11 +62,18 @@ class UsersController < ApplicationController
     end
 
 
+    
+
+
 
     private 
 
     def user_params
         params.require(:user).permit(:first_name, :last_name, :username, :password, :email, :phone_number)
+    end
+
+    def drive_params
+        params.require(:user).permit(:first_name, :last_name, :username, :password, :email, :phone_number, :car, :model, :model)
     end
 
     def update_params
