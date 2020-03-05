@@ -71,6 +71,15 @@ class OrdersController < ApplicationController
         end
     end 
 
+
+    def get_driver 
+        @order = Order.find_by(id: params[:id])
+        @driver = User.find_by(id:@order.driver_id)
+        # byebug
+        render json: @driver
+    end
+
+
     def location
         # byebug
         @coords = {lat: location_params[:lat], long: location_params[:long]}

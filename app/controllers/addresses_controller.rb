@@ -24,7 +24,7 @@ class AddressesController < ApplicationController
         @address.long = data["results"][0]["geometry"]["location"]["lng"]
         if @address.valid?
             @address.save
-            byebug
+            # byebug
             render json: {msg: 'PASS', address: @address}
         else 
             render json: {msg: 'FAIL'}

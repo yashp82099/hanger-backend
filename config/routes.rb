@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/get/driver/order', to: 'orders#get_driver_order', as: 'get_driver_order'
   patch '/order/done/:id', to: 'orders#done', as: 'done_order'
   post '/location', to: 'orders#location', as: 'location'
+  get '/get/order/driver/:id', to: 'orders#get_driver'
   resources :sessions
   resources :users
   resources :orders
